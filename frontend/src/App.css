@@ -1,102 +1,592 @@
 
+:root {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #f8fafc;
+  background: #080d20;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
 #root {
-  min-height: 100vh;
+  min-width: 320px;
+  min-height: 100%;
 }
 
 body {
   margin: 0;
-  background: #0f172a;
   color: white;
-  font-family: -apple-system, sans-serif;
+  background: #080d20;
 }
 
-.diary {
-  max-width: 480px;
-  margin: auto;
-  padding: 25px 18px;
-}
-
-.diary > p {
-  color: #94a3b8;
-}
-
-.days {
-  display: flex;
-  gap: 5px;
-  margin: 25px 0;
-}
-
-.days button {
-  flex: 1;
-  padding: 12px 0;
-  font-size: 13px;
-  background: #1e293b;
-}
-
-.days button.active {
-  background: #7c3aed;
-}
-
-.task, .form {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 16px;
-  margin-bottom: 15px;
-}
-
-.task h3 {
-  color: #a78bfa;
-}
-
-input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  background: #0f172a;
-  color: white;
-  border: 1px solid #475569;
-  border-radius: 10px;
-  font-size: 16px;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 button {
-  background: #7c3aed;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 0%, #29164e, transparent 45%),
+    linear-gradient(145deg, #080d20, #111832 65%, #090e20);
+}
+
+.orb {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.55;
+  filter: blur(4px);
+  animation: float 12s ease-in-out infinite;
+}
+
+.orb-one {
+  width: 310px;
+  height: 310px;
+  top: -100px;
+  right: -120px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #b79cff,
+    #6933ba 45%,
+    transparent 75%
+  );
+  box-shadow: 0 0 100px #763cdb66;
+}
+
+.orb-two {
+  width: 230px;
+  height: 230px;
+  top: 480px;
+  left: -150px;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #45baff,
+    #264cbb 50%,
+    transparent 75%
+  );
+  animation-delay: -4s;
+}
+
+.orb-three {
+  width: 180px;
+  height: 180px;
+  bottom: 100px;
+  right: -100px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #f78bd9,
+    #853db5 50%,
+    transparent 75%
+  );
+  animation-delay: -7s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(25px) rotate(12deg);
+  }
+}
+
+.diary {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 8px 18px 65px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.header h1 {
   color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 13px;
+  font-size: clamp(30px, 6vw, 42px);
+  margin: 8px 0;
+  letter-spacing: -1px;
+}
+
+.header p {
+  color: #b7bed7;
+  margin: 0;
+}
+
+.version {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #c4b5fd;
+  font-weight: 800;
+}
+
+.header-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  font-size: 28px;
+  background: linear-gradient(135deg, #8952ff, #4524a2);
+  box-shadow: 0 10px 30px #773aff66;
+  transform: rotate(-8deg);
+}
+
+.glass {
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 22px;
+  border: 1px solid #ffffff19;
+  background: linear-gradient(145deg, #26304bc9, #151d35dd);
+  box-shadow:
+    0 15px 35px #00000025,
+    inset 0 1px #ffffff12;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: white;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.section-title h2 {
+  margin: 0;
+}
+
+.pill {
+  white-space: nowrap;
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: #d9ccff;
+  background: #8153eb30;
+  border: 1px solid #9a6cff35;
+}
+
+.week-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+  text-align: center;
+}
+
+.week-navigation button {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff22;
+  border-radius: 13px;
+  background: #ffffff0d;
+  color: white;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.week-navigation strong {
+  font-size: 14px;
+}
+
+.week-navigation small {
+  display: block;
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.day {
+  position: relative;
+  min-width: 0;
+  padding: 11px 2px 14px;
+  border: 1px solid #ffffff10;
+  border-radius: 12px;
+  background: #10182d;
+  color: #b8c2dc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.day span {
+  font-size: 12px;
+}
+
+.day strong {
+  font-size: 17px;
+}
+
+.day.active {
+  background: linear-gradient(145deg, #a06aff, #6636d2);
+  border-color: #ad84ff;
+  color: white;
+  box-shadow: 0 5px 18px #7542e355;
+}
+
+.day i {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+}
+
+.calendar-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.calendar-actions > button,
+.date-picker {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 12px 8px;
+  text-align: center;
+  border: 1px solid #ffffff25;
+  border-radius: 11px;
+  background: #ffffff0c;
+  color: #dcd6fa;
+  font-size: 13px;
+}
+
+.date-picker {
+  overflow: hidden;
   cursor: pointer;
 }
 
-.form button {
+.date-picker input {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
-.delete {
-  background: #7f1d1d;
+.day-heading {
+  margin-top: 28px;
 }
 
-.form {
+.lesson {
+  border-left: 3px solid #9363ff;
+}
+
+.lesson-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lesson-time {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.lesson h3 {
+  margin: 19px 0 15px;
+  font-size: 20px;
+}
+
+.lesson-homework {
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 14px;
+  background: #0c142b;
+  border: 1px solid #9465ff33;
+}
+
+.lesson-homework h4 {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #d7c7ff;
+}
+
+.homework-item {
+  padding: 12px 0;
+  border-top: 1px solid #ffffff12;
+}
+
+.homework-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: white;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.homework-check input {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  margin: 2px 0 0;
+  accent-color: #9060f5;
+}
+
+.homework-check .done {
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.homework-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.homework-bottom small {
+  color: #aeb8d0;
+  font-size: 12px;
+}
+
+.delete-small {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: #fda4af;
+  font-size: 12px;
+}
+
+.add-homework-button {
+  display: block;
   width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  overflow: hidden;
+  padding: 12px;
+  margin: 15px 0;
+  border: 1px solid #9966ff55;
+  border-radius: 11px;
+  background: #8655eb25;
+  color: #e4d9ff;
+  font-weight: 700;
 }
 
+.inline-homework-form {
+  padding: 16px;
+  margin: 15px 0;
+  border-radius: 14px;
+  border: 1px solid #9966ff55;
+  background: #0c142b;
+}
+
+.inline-homework-form h4 {
+  margin: 0 0 18px;
+}
+
+.inline-homework-form label,
+.form label {
+  display: block;
+  margin-bottom: 9px;
+  color: #c6cde1;
+  font-size: 13px;
+}
+
+.inline-homework-form input,
+.inline-homework-form textarea,
 .form input {
   display: block;
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  box-sizing: border-box;
+  min-height: 48px;
+  padding: 13px;
+  margin-bottom: 19px;
+  border-radius: 11px;
+  border: 1px solid #ffffff25;
+  background: #0b1329;
+  color: white;
+  font-size: 16px;
+  outline: none;
 }
 
-.form input[type="time"] {
+.inline-homework-form textarea {
+  resize: vertical;
+}
+
+.inline-homework-form input:focus,
+.inline-homework-form textarea:focus,
+.form input:focus {
+  border-color: #9c70ff;
+}
+
+input[type="time"],
+input[type="date"] {
   appearance: none;
   -webkit-appearance: none;
-  min-height: 48px;
-  padding: 12px;
-  color: white;
   color-scheme: dark;
+  overflow: hidden;
+}
+
+input[type="time"]::-webkit-date-and-time-value,
+input[type="date"]::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.primary {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #9966ff, #6936d6);
+  box-shadow: 0 8px 25px #723ae544;
+  color: white;
+  font-weight: 700;
+}
+
+.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #ffffff25;
+  background: #ffffff0c;
+  color: #cbd5e1;
+}
+
+.delete-lesson {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ef444433;
+  background: #ef44441a;
+  color: #fda4af;
+  font-size: 13px;
+}
+
+.form {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.form h2 {
+  margin: 0 0 20px;
+}
+
+.form .primary {
+  width: 100%;
+}
+
+.copy-button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 13px;
+  border: 1px solid #a37aff66;
+  background: #8153e820;
+  color: #d7c7ff;
+  font-weight: 700;
+}
+
+.empty {
+  padding: 30px 15px;
+  text-align: center;
+}
+
+.empty span {
+  font-size: 35px;
+}
+
+.empty h3 {
+  margin-bottom: 6px;
+}
+
+.empty p {
+  color: #aeb8d0;
+  font-size: 14px;
+}
+
+footer {
+  margin-top: 35px;
+  text-align: center;
+  color: #7e8aa6;
+  font-size: 12px;
+}
+
+@media (max-width: 380px) {
+  .diary {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .glass {
+    padding: 14px;
+  }
+
+  .days {
+    gap: 3px;
+  }
+
+  .day strong {
+    font-size: 15px;
+  }
+
+  .week-navigation strong {
+    font-size: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
+  }
 }
